@@ -26,6 +26,7 @@ int sensorPin = A0;   // Entrada del potenciometro
 int ledPin = 13;      // Seleccionamos el pin para el LED
 int sensorValue = 0;  // Variable analogica del sensor
 // the setup function runs once when you press reset or power the board
+
 void setup() {
   // Declaramos ledPin como salida:
   pinMode(ledPin, OUTPUT);
@@ -45,5 +46,7 @@ void loop() {
   digitalWrite(ledPin, LOW);
   // Detenemos el programa unos milisegundos dependiendo del valor analogico:
   delay(sensorValue);
+  
+  
 }
-}
+
