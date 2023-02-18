@@ -22,16 +22,28 @@
   https://www.arduino.cc/en/Tutorial/BuiltInExamples/Blink
 */
 
+int sensorPin = A0;   // Entrada del potenciometro
+int ledPin = 13;      // Seleccionamos el pin para el LED
+int sensorValue = 0;  // Variable analogica del sensor
 // the setup function runs once when you press reset or power the board
 void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
-  pinMode(LED_BUILTIN, OUTPUT);
+  // Declaramos ledPin como salida:
+  pinMode(ledPin, OUTPUT);
 }
 
 // the loop function runs over and over again forever
 void loop() {
-  digitalWrite(LED_BUILTIN, HIGH);  // turn the LED on (HIGH is the voltage level)
-  delay(1000);                      // wait for a second
-  digitalWrite(LED_BUILTIN, LOW);   // turn the LED off by making the voltage LOW
-  delay(1000);                      // wait for a second
+ 
+  // Lectura analogica
+  // Leemos el valor del sensor:
+  sensorValue = analogRead(sensorPin);
+  // Encendemos ledPin
+  digitalWrite(ledPin, HIGH);
+  // Detenemos el programa unos milisegundos dependiendo del valor analogico:
+  delay(sensorValue);
+  // Apagamos el ledPin:
+  digitalWrite(ledPin, LOW);
+  // Detenemos el programa unos milisegundos dependiendo del valor analogico:
+  delay(sensorValue);
+}
 }
