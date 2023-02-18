@@ -22,6 +22,11 @@
   https://www.arduino.cc/en/Tutorial/BuiltInExamples/Blink
 */
 
+#include <Servo.h>
+
+Servo myservo;  // Creamos el objeto de servo a utilizar
+int pos = 0;    // Guarda la posicion del servo
+
 int sensorPin = A0;   // Entrada del potenciometro
 int ledPin = 13;      // Seleccionamos el pin para el LED
 int sensorValue = 0;  // Variable analogica del sensor
@@ -30,6 +35,8 @@ int sensorValue = 0;  // Variable analogica del sensor
 void setup() {
   // Declaramos ledPin como salida:
   pinMode(ledPin, OUTPUT);
+  myservo.attach(9);  // Se asigna la senal pwm del servo al pin 9
+  
 }
 
 // the loop function runs over and over again forever
@@ -45,6 +52,10 @@ void loop() {
   // Apagamos el ledPin:
   digitalWrite(ledPin, LOW);
   // Detenemos el programa unos milisegundos dependiendo del valor analogico:
+  
+  pos = map(sensorValue, 0, 1023, 0, 180);     // Se realiza el mapeo de la entrada del sensor analogico
+  myservo.write(pos); 				// se cambia de posicion el servo de acuerdo a la frecuencia del delay de los leds
+  
   delay(sensorValue);
   
   
