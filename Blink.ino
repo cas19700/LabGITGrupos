@@ -22,9 +22,23 @@
   https://www.arduino.cc/en/Tutorial/BuiltInExamples/Blink
 */
 
+//PInes del sensor ultrasónico
+#define TRIG_PIN 8
+#define ECHO_PIN 7
+
+//Velocidad del sonido (cm/uS)
+#define VELOCIDAD_S 0.0343
+
+long duracion;
+float distancia;
+int mins; 
+
+
 int sensorPin = A0;   // Entrada del potenciometro
 int ledPin = 13;      // Seleccionamos el pin para el LED
+int ledprox = 4;
 int sensorValue = 0;  // Variable analogica del sensor
+
 // the setup function runs once when you press reset or power the board
 void setup() {
   // Declaramos ledPin como salida:
@@ -33,7 +47,30 @@ void setup() {
 
 // the loop function runs over and over again forever
 void loop() {
+
+  digitalWrite(TRIG_PIN, LOW);
+  delayMicroseconds(2);
+  
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(10);
+  
+  digitalWrite(TRIG_PIN, LOW);
+  
+  duracion = pulseIn(ECHO_PIN, HIGH);
+  distancia = (duracion*VELODIDAD_S/2)*10;
+  
+  delay(80);
+  
+
+if (distancia > 5.00 && distancia < 500){
+  digitalWrite(ledprox, HIGH); 
+}
  
+if (distancia < 5.00 || distancia > 500){
+  digitalWrite(ledprox, LOW);
+} 
+
+
   // Lectura analogica
   // Leemos el valor del sensor:
   sensorValue = analogRead(sensorPin);
@@ -46,4 +83,4 @@ void loop() {
   // Detenemos el programa unos milisegundos dependiendo del valor analogico:
   delay(sensorValue);
 }
-}
+
