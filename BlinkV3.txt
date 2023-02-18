@@ -1,0 +1,1 @@
+Se agrego funcionalidad del motor servo para la misma entrada analogica utilizada para el blink de tal manera que conforme el delay se modifica en el blink, el servo se mueve
